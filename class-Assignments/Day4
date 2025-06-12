@@ -1,0 +1,25 @@
+package DAY4;
+
+public class NullpointerException {
+	public static void main(String[] args) {
+		
+	     try {
+	            String[] str = new String[5]; 
+	            str[0] = "nivetha";
+	            str[1] = "nagalingam";
+	            str[2] = "swetha";
+	            str[3] = "Indhumathi";
+	            str[4] = "Monica";
+	            str[1] = null; 
+	            System.out.println("Length: " + str[1].length()); 
+
+	        } catch (ArrayIndexOutOfBoundsException e) {
+	            System.out.println("Caught ArrayIndexOutOfBoundsException: " + e);
+	        } catch (NullPointerException e) {
+	            System.out.println("Caught NullPointerException: " + e);
+	        }
+		
+		
+	}
+
+}
