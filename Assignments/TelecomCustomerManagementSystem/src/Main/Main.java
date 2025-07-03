@@ -15,7 +15,6 @@ public class Main {
 		telecom.recordCall(c1.getCustomerId(), "97101015645", 3);
 		
 		//subscribe Vas..
-		
 		telecom.subscribeVas(c1.getCustomerId(), "caller Tune");
 		telecom.subscribeVas(c1.getCustomerId(), "Missed call Alert");
 		
