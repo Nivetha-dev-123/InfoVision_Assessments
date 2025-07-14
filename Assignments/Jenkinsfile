@@ -1,0 +1,41 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'Maven'     // Define this Maven version in Jenkins config
+        jdk 'JDK17'       // Define this JDK version in Jenkins config
+    }
+
+    environment {
+        SONAR_TOKEN = credentials('sonar-token') // Add this as a Jenkins secret
+    }
+
+    stages {
+        stage('Clone') {
+            steps {
+                git 'https://github.com/your-username/todo-list.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('MySonarQube') {
+                    sh "mvn sonar:sonar -Dsonar.login=$SONAR_TOKEN"
+                }
+            }
+        }
+
+        stage('Docker Build & Run') {
+            steps {
+                sh 'docker build -t todolist-app .'
+                sh 'docker run -d -p 8080:8080 todolist-app'
+            }
+        }
+    }
+}
